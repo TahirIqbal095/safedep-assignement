@@ -1,10 +1,32 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { licensesData } from "@/config/licenses";
+
 export default function LicensesTab() {
   return (
-    <div className="p-4">
-      <h3 className="text-lg font-medium">Licenses</h3>
-      <p className="text-muted-foreground mt-2">
-        License information and compliance details will be shown here.
-      </p>
-    </div>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[20%]">License ID</TableHead>
+          <TableHead className="w-[40%]">License Name</TableHead>
+          <TableHead className="w-[40%]">Reference URL</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {licensesData.map((license) => (
+          <TableRow key={license.id}>
+            <TableCell>{license.id}</TableCell>
+            <TableCell>{license.name}</TableCell>
+            <TableCell>{license.url}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

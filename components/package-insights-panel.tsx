@@ -24,8 +24,8 @@ export default function PackageInsightsPanel() {
             ))}
           </TabsList>
         </div>
-        <div className="bg-white">
-          <TabsContent value="overview">
+        <div className="min-h-150 bg-white">
+          <TabsContent className="mx-auto max-w-4xl" value="overview">
             <OverviewTab />
           </TabsContent>
           <TabsContent value="vulnerabilities">

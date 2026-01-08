@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="flex items-baseline-last justify-between gap-6">
       <div>
-        <span className="text-muted-foreground text-sm font-light tracking-widest uppercase">
+        <span className="text-muted-foreground/60 text-sm font-light tracking-widest uppercase">
           Powered by
         </span>
         <div className="flex items-center gap-1">
