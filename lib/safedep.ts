@@ -14,9 +14,11 @@ function authenticationInterceptor(token: string, tenant: string): Interceptor {
 export async function getPackageInsight({
   name,
   version,
+  ecosystem,
 }: {
   name: string;
   version: string;
+  ecosystem: string;
 }) {
   const token = process.env.SAFEDEP_API_KEY;
   if (!token) {
@@ -34,11 +36,29 @@ export async function getPackageInsight({
     interceptors: [authenticationInterceptor(token, tenantId)],
   });
 
+  const ecosystemMap: Record<string, Ecosystem> = {
+    npm: Ecosystem.NPM,
+    pypi: Ecosystem.PYPI,
+    maven: Ecosystem.MAVEN,
+    rubygems: Ecosystem.RUBYGEMS,
+    nuget: Ecosystem.NUGET,
+    cargo: Ecosystem.CARGO,
+    go: Ecosystem.GO,
+    github_actions: Ecosystem.GITHUB_ACTIONS,
+    vscode: Ecosystem.VSCODE,
+  };
+
+  const resolvedEcosystem = ecosystemMap[ecosystem.toLowerCase()];
+
+  if (resolvedEcosystem === undefined) {
+    throw new Error(`Unsupported ecosystem: ${ecosystem}`);
+  }
+
   const client = createClient(InsightService, transport);
   const res = await client.getPackageVersionInsight({
     packageVersion: {
       package: {
-        ecosystem: Ecosystem.NPM,
+        ecosystem: resolvedEcosystem,
         name: name,
       },
       version: version,
