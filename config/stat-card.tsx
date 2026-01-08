@@ -18,7 +18,7 @@ export const statCardConfig: StatCardConfig[] = [
   },
   {
     label: "OpenSSF Scorecard",
-    value: "9.5 / 10",
+    value: "9.5/10",
     primary: true,
     icon: <BookOpenText size={14} />,
   },

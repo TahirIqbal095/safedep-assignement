@@ -28,7 +28,7 @@ function StatCard({ label, value, icon, primary, danger }: StatCardProps) {
       </div>
       <p
         className={cn(
-          "mt-4 text-xl font-medium tracking-tighter md:text-2xl",
+          "mt-4 text-xl font-medium md:text-2xl",
           primary === true ? "text-primary" : undefined
         )}
       >

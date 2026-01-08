@@ -3,8 +3,10 @@ import { Github } from "lucide-react";
 export default function PackageSummary() {
   return (
     <section className="flex flex-col gap-1.5 text-sm">
-      <h2 className="flex items-center gap-1">
-        <Github size={18} />
+      <h2 className="flex items-center gap-1.5">
+        <span className="shadow-custom rounded bg-white p-1">
+          <Github size={18} />
+        </span>
         <span className="text-lg font-medium">next@15.5.4</span>
       </h2>
 
