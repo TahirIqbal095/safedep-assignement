@@ -39,8 +39,6 @@ async function OpenSourcePackageDetails({ params }: Props) {
   const version = pkgSlug[pkgSlug.length - 1];
   const name = pkgSlug.slice(0, -1).join("/");
 
-  console.log(name, version);
-
   let insightData: PackageInsightResponse | undefined;
   let malwareData: MalwareAnalysisResponse | undefined;
 

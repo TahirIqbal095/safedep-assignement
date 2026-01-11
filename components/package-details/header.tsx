@@ -8,8 +8,8 @@ import { motion } from "motion/react";
 function Header() {
   return (
     <motion.header
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 10, filter: "blur(10px" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       className="flex items-baseline-last justify-between gap-6"
     >
       <div>
