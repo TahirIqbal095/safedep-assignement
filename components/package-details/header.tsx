@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Github } from "lucide-react";
 import { motion } from "motion/react";
+import GithubIcon from "../svgs/github-icon";
 
 function Header() {
   return (
@@ -24,7 +24,8 @@ function Header() {
         </div>
       </div>
       <Button>
-        <Github /> Install Github App
+        <GithubIcon />
+        <span>Install Github App</span>
       </Button>
     </motion.header>
   );

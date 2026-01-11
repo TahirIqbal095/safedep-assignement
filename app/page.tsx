@@ -36,8 +36,6 @@ export default function Home() {
           >
             <motion.div
               variants={item}
-              initial="hidden"
-              animate="show"
               className="relative h-6 w-6 md:h-8 md:w-8"
             >
               <Image

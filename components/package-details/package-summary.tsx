@@ -1,6 +1,7 @@
 "use client";
-import { Github } from "lucide-react";
+
 import { motion } from "motion/react";
+import GithubIcon from "../svgs/github-icon";
 
 interface PackageSummaryProps {
   packageName: string;
@@ -24,8 +25,8 @@ export default function PackageSummary({
       className="flex flex-col gap-1.5 text-sm"
     >
       <h2 className="flex items-center gap-1.5">
-        <span className="shadow-custom rounded bg-white p-1">
-          <Github size={18} />
+        <span className="shadow-custom relative h-6 w-6 rounded bg-white p-1">
+          <GithubIcon className="absolute inset-0" primary={true} />
         </span>
         <span className="text-lg font-medium">
           {packageName}@{version}
