@@ -1,9 +1,8 @@
 import { InsightErrorDialog } from "@/components/insight-error-dialog";
 import { getPackageInsight, getMalwareAnalysis } from "@/actions/safedep";
-import PackageSummary from "@/components/package-summary";
-import Header from "@/components/header";
-import StatCard from "@/components/stat-card";
-import PackageInsightsPanel from "@/components/package-insights-panel";
+import PackageSummary from "@/components/package-details/package-summary";
+import Header from "@/components/package-details/header";
+import PackageInsightsPanel from "@/components/package-insights/package-insights-panel";
 import {
   generateStatCards,
   getPackageSummaryData,
@@ -12,6 +11,13 @@ import {
   sanitizeVulnerabilities,
 } from "@/utils/sanitize-data";
 import { PackageInsightResponse, MalwareAnalysisResponse } from "@/types";
+import { Metadata } from "next";
+import StatCardView from "@/components/package-details/stat-card-view";
+
+export const metadata: Metadata = {
+  title: "Detail of Open Source Package",
+  description: "This is the details of the open source package ",
+};
 
 interface Props {
   params: Promise<{ ecosystem: string; name: string; version: string }>;
@@ -62,11 +68,7 @@ async function OpenSourcePackageDetails({ params }: Props) {
       <main className="shadow-custom mt-8 overflow-hidden rounded">
         <div className="border-border space-y-4 border-b bg-[#F8FAFC] p-5">
           <PackageSummary {...summaryData} />
-          <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            {statCards.map((stat) => (
-              <StatCard key={stat.label} {...stat} />
-            ))}
-          </section>
+          <StatCardView statCards={statCards} />
         </div>
         <PackageInsightsPanel
           vulnerabilities={vulnerabilities}

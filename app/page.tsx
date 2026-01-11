@@ -49,8 +49,6 @@ export default function Home() {
             </motion.div>
             <motion.div
               variants={item}
-              initial="hidden"
-              animate="show"
               className="text-xl font-medium tracking-tight text-white/90 md:text-2xl"
             >
               SafeDep

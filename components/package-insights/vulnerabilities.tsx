@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { RiskBadge } from "../risk-badge";
+import { RiskBadge } from "./risk-badge";
 
 export default function VulnerabilitiesTab({
   vulns,

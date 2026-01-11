@@ -1,4 +1,6 @@
+"use client";
 import { Github } from "lucide-react";
+import { motion } from "motion/react";
 
 interface PackageSummaryProps {
   packageName: string;
@@ -16,7 +18,11 @@ export default function PackageSummary({
   sha256,
 }: PackageSummaryProps) {
   return (
-    <section className="flex flex-col gap-1.5 text-sm">
+    <motion.section
+      initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      className="flex flex-col gap-1.5 text-sm"
+    >
       <h2 className="flex items-center gap-1.5">
         <span className="shadow-custom rounded bg-white p-1">
           <Github size={18} />
@@ -48,6 +54,6 @@ export default function PackageSummary({
           </dd>
         </div>
       </dl>
-    </section>
+    </motion.section>
   );
 }

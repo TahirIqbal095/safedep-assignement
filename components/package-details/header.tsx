@@ -1,10 +1,17 @@
+"use client";
+
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Github } from "lucide-react";
+import { motion } from "motion/react";
 
 function Header() {
   return (
-    <header className="flex items-baseline-last justify-between gap-6">
+    <motion.header
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex items-baseline-last justify-between gap-6"
+    >
       <div>
         <span className="text-muted-foreground/60 text-sm font-light tracking-widest uppercase">
           Powered by
@@ -19,7 +26,7 @@ function Header() {
       <Button>
         <Github /> Install Github App
       </Button>
-    </header>
+    </motion.header>
   );
 }
 
