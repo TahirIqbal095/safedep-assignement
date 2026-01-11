@@ -1,4 +1,4 @@
-import { InsightErrorDialog } from "@/components/insight-error-dialog";
+import { InsightErrorDialog } from "@/components/package-details/insight-error-dialog";
 import { getPackageInsight, getMalwareAnalysis } from "@/actions/safedep";
 import PackageSummary from "@/components/package-details/package-summary";
 import Header from "@/components/package-details/header";
@@ -14,17 +14,33 @@ import { PackageInsightResponse, MalwareAnalysisResponse } from "@/types";
 import { Metadata } from "next";
 import StatCardView from "@/components/package-details/stat-card-view";
 
-export const metadata: Metadata = {
-  title: "Detail of Open Source Package",
-  description: "This is the details of the open source package ",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { ecosystem, package: pkgSlug } = await params;
+  const version = pkgSlug[pkgSlug.length - 1];
+  const name = pkgSlug.slice(0, -1).join("/");
+
+  return {
+    title: `${name} v${version} - ${ecosystem} Package Insights | SafeDep`,
+    description: `Detailed security insights, vulnerability analysis, and malware detection for ${name} version ${version} in the ${ecosystem} ecosystem.`,
+    openGraph: {
+      title: `${name} v${version} - Security Insights`,
+      description: `View vulnerabilities, licenses, and malware analysis for ${name} v${version}.`,
+      type: "website",
+    },
+  };
+}
 
 interface Props {
-  params: Promise<{ ecosystem: string; name: string; version: string }>;
+  params: Promise<{ ecosystem: string; package: string[] }>;
 }
 
 async function OpenSourcePackageDetails({ params }: Props) {
-  const { ecosystem, name, version } = await params;
+  const { ecosystem, package: pkgSlug } = await params;
+  const version = pkgSlug[pkgSlug.length - 1];
+  const name = pkgSlug.slice(0, -1).join("/");
+
+  console.log(name, version);
+
   let insightData: PackageInsightResponse | undefined;
   let malwareData: MalwareAnalysisResponse | undefined;
 
