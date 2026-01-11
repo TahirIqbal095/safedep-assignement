@@ -36,8 +36,8 @@ export default function PackageInsightsPanel({
         value={activeTab}
         onValueChange={setActiveTab}
       >
-        <div className="border-border border-b py-2">
-          <TabsList className="ml-4 flex items-center gap-4 md:ml-6 md:gap-8">
+        <div className="border-border overflow-x-auto border-b py-2">
+          <TabsList className="ml-2 flex items-center gap-4 md:ml-6 md:gap-8">
             {tabs.map((tab) => (
               <TabsTrigger
                 value={tab.value}

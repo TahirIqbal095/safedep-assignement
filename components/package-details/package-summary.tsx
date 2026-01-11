@@ -40,18 +40,21 @@ export default function PackageSummary({
             <time dateTime={analyzedAt}>{analyzedAt}</time>
           </dd>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-baseline gap-1.5">
           <dt className="text-muted-foreground">Source:</dt>
           <dd>
-            <a href={source} className="break-all">
+            <a
+              href={source}
+              className="text-xs break-all hover:underline md:text-sm"
+            >
               {source}
             </a>
           </dd>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-baseline gap-1.5">
           <dt className="text-muted-foreground">SHA256:</dt>
           <dd>
-            <code className="break-all">{sha256}</code>
+            <code className="text-xs break-all md:text-sm">{sha256}</code>
           </dd>
         </div>
       </dl>
