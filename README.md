@@ -2,13 +2,13 @@
 
 A comprehensive dashboard for analyzing open-source software packages. This application provides deep insights into package vulnerabilities, licensing, maintenance scores, and malware analysis by leveraging the SafeDep API.
 
-## 🚀 Features
+## Features
 
 - **Package Insights**: View detailed security scores, vulnerability reports, and licensing information.
 - **Modern UI/UX**: Built with Next.js 16, Tailwind CSS, Motion and Shadcn UI for a responsive and accessible experience.
 - **Server Actions**: Utilizes Next.js Server Actions for secure and efficient API data fetching.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
@@ -16,7 +16,7 @@ A comprehensive dashboard for analyzing open-source software packages. This appl
 - **Icons**: Lucide React
 - **Data Source**: SafeDep API
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before running the project, ensure you have the following installed:
 
@@ -28,7 +28,7 @@ Before running the project, ensure you have the following installed:
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/TahirIqbal095/safedep-assignement.git
    cd my-app
    ```
 
@@ -54,7 +54,7 @@ Before running the project, ensure you have the following installed:
 
    Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## 🏗️ Project Structure
+## Project Structure
 
 - **`actions/`**: Server actions for fetching data from SafeDep APIs (`InsightService` and `MalwareAnalysisService`).
 - **`app/`**: Next.js App Router structure, including the dynamic package details page `p/[ecosystem]/[name]/[version]`.
