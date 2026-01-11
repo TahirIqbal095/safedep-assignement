@@ -1,9 +1,9 @@
 "use server";
 
-import { createClient, Interceptor } from "@connectrpc/connect";
+import { MalwareAnalysisService } from "@buf/safedep_api.connectrpc_es/safedep/services/malysis/v1/malysis_connect.js";
+import { createPromiseClient, Interceptor } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-node";
 import { InsightService } from "@buf/safedep_api.connectrpc_es/safedep/services/insights/v2/insights_connect.js";
-import { MalwareAnalysisService } from "@buf/safedep_api.connectrpc_es/safedep/services/malysis/v1/malysis_connect.js";
 import { ecosystemMap } from "@/utils/ecosystem-map";
 import { PackageParams } from "@/types";
 
@@ -49,7 +49,7 @@ export async function getPackageInsight({
   version,
   ecosystem,
 }: PackageParams) {
-  const client = createClient(InsightService, getTransport());
+  const client = createPromiseClient(InsightService, getTransport());
   const res = await client.getPackageVersionInsight({
     packageVersion: {
       package: {
@@ -68,7 +68,7 @@ export async function getMalwareAnalysis({
   version,
   ecosystem,
 }: PackageParams) {
-  const client = createClient(MalwareAnalysisService, getTransport());
+  const client = createPromiseClient(MalwareAnalysisService, getTransport());
   const res = await client.queryPackageAnalysis({
     target: {
       packageVersion: {
