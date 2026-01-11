@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: hsl(210 40% 98.0392%);
+  --background: #f1f5f9;
   --foreground: hsl(222.2222 47.3684% 11.1765%);
   --card: hsl(0 0% 100%);
   --card-foreground: hsl(222.2222 47.3684% 11.1765%);
@@ -17,7 +17,7 @@
   --accent-foreground: hsl(222.2222 47.3684% 11.1765%);
   --destructive: hsl(0 84.2365% 60.1961%);
   --destructive-foreground: hsl(210 40% 98.0392%);
-  --border: hsl(214.2857 31.8182% 91.3725%);
+  --border: #e2e8f0;
   --input: hsl(214.2857 31.8182% 91.3725%);
   --ring: hsl(198.6301 88.664% 48.4314%);
   --chart-1: hsl(142.0859 70.5628% 45.2941%);

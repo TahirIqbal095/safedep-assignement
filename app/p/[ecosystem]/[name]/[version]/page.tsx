@@ -1,5 +1,17 @@
 import { InsightErrorDialog } from "@/components/insight-error-dialog";
-import { getPackageInsight } from "@/lib/safedep";
+import { getPackageInsight, getMalwareAnalysis } from "@/actions/safedep";
+import PackageSummary from "@/components/package-summary";
+import Header from "@/components/header";
+import StatCard from "@/components/stat-card";
+import PackageInsightsPanel from "@/components/package-insights-panel";
+import {
+  generateStatCards,
+  getPackageSummaryData,
+  sanitizeLicenses,
+  sanitizeVersions,
+  sanitizeVulnerabilities,
+} from "@/utils/sanitize-data";
+import { PackageInsightResponse, MalwareAnalysisResponse } from "@/types";
 
 interface Props {
   params: Promise<{ ecosystem: string; name: string; version: string }>;
@@ -7,14 +19,24 @@ interface Props {
 
 async function OpenSourcePackageDetails({ params }: Props) {
   const { ecosystem, name, version } = await params;
-  let data;
+  let insightData: PackageInsightResponse | undefined;
+  let malwareData: MalwareAnalysisResponse | undefined;
 
   try {
-    data = await getPackageInsight({
-      ecosystem,
-      name: name,
-      version,
-    });
+    const [insightRes, malwareRes] = await Promise.allSettled([
+      getPackageInsight({ ecosystem, name, version }),
+      getMalwareAnalysis({ ecosystem, name, version }),
+    ]);
+
+    if (insightRes.status === "fulfilled") {
+      insightData = insightRes.value as PackageInsightResponse;
+    } else {
+      throw insightRes.reason;
+    }
+
+    if (malwareRes.status === "fulfilled") {
+      malwareData = malwareRes.value as MalwareAnalysisResponse;
+    }
   } catch (error) {
     console.error(error);
     return (
@@ -28,12 +50,30 @@ async function OpenSourcePackageDetails({ params }: Props) {
     );
   }
 
+  const summaryData = getPackageSummaryData(insightData, malwareData);
+  const statCards = generateStatCards(insightData);
+  const vulnerabilities = sanitizeVulnerabilities(insightData);
+  const versionsData = sanitizeVersions(insightData);
+  const licenses = sanitizeLicenses(insightData);
+
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold">Package Details</h1>
-      <pre className="mt-4 overflow-auto rounded bg-gray-100 p-4">
-        {JSON.stringify(data.toJson(), null, 2)}
-      </pre>
+      <Header />
+      <main className="shadow-custom mt-8 overflow-hidden rounded">
+        <div className="border-border space-y-4 border-b bg-[#F8FAFC] p-5">
+          <PackageSummary {...summaryData} />
+          <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            {statCards.map((stat) => (
+              <StatCard key={stat.label} {...stat} />
+            ))}
+          </section>
+        </div>
+        <PackageInsightsPanel
+          vulnerabilities={vulnerabilities}
+          versions={versionsData}
+          licenses={licenses}
+        />
+      </main>
     </div>
   );
 }

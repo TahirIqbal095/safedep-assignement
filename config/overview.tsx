@@ -1,13 +1,4 @@
-export type ContentItem = {
-  type: "text" | "note";
-  value: string;
-};
-
-export type OverviewSection = {
-  title: string;
-  borderColor?: string;
-  content: ContentItem[];
-};
+import { OverviewSection } from "@/types";
 
 export const overviewConfig: OverviewSection[] = [
   {

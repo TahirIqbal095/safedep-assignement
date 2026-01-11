@@ -6,9 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { licensesData } from "@/config/licenses";
+import { LicenseData } from "@/types";
 
-export default function LicensesTab() {
+export default function LicensesTab({ licenses }: { licenses: LicenseData[] }) {
   return (
     <Table>
       <TableHeader>
@@ -19,13 +19,30 @@ export default function LicensesTab() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {licensesData.map((license) => (
-          <TableRow key={license.id}>
-            <TableCell>{license.id}</TableCell>
-            <TableCell>{license.name}</TableCell>
-            <TableCell>{license.url}</TableCell>
+        {licenses.length === 0 ? (
+          <TableRow>
+            <TableCell colSpan={3} className="h-24 text-center">
+              No license data found.
+            </TableCell>
           </TableRow>
-        ))}
+        ) : (
+          licenses.map((license) => (
+            <TableRow key={license.id}>
+              <TableCell>{license.id}</TableCell>
+              <TableCell>{license.name}</TableCell>
+              <TableCell>
+                <a
+                  href={license.url}
+                  className="text-primary hover:text-primary/90 underline-offset-4 hover:underline"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {license.url}
+                </a>
+              </TableCell>
+            </TableRow>
+          ))
+        )}
       </TableBody>
     </Table>
   );
